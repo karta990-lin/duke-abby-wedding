@@ -874,13 +874,11 @@
     }
   }
 
-  // ── FORM SUBMIT (Hidden iframe technique) ──
+  // ── FORM SUBMIT (fetch no-cors) ──
   function submitForm(e) {
     e.preventDefault();
-    const form = document.getElementById('rsvpForm');
     const ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScTlgf8LWp_8aVC0WPl6GtruQY7T4v7sng3tUPfdCOIqXS3-A/formResponse';
 
-    // Build query string from form fields
     const fields = {
       'entry.512433842': document.getElementById('f-name').value,
       'entry.1350810425': document.getElementById('f-email').value,
@@ -895,42 +893,23 @@
       'entry.1733585708': document.getElementById('f-extra').value,
     };
 
-    const params = Object.entries(fields)
-      .filter(([,v]) => v !== '')
-      .map(([k,v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
+    const body = Object.entries(fields)
+      .filter(([, v]) => v !== '')
+      .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
       .join('&');
 
-    const iframe = document.getElementById('hidden_iframe');
-    iframe.onload = function() {
-      form.style.display = 'none';
+    fetch(ACTION, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body
+    }).then(() => {
+      document.getElementById('rsvpForm').style.display = 'none';
       document.getElementById('formSuccess').classList.add('show');
-    };
-
-    // Create a temporary form and submit to iframe
-    const tempForm = document.createElement('form');
-    tempForm.method = 'POST';
-    tempForm.action = ACTION;
-    tempForm.target = 'hidden_iframe';
-    tempForm.style.display = 'none';
-
-    Object.entries(fields).forEach(([k, v]) => {
-      if (v === '') return;
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = k;
-      input.value = v;
-      tempForm.appendChild(input);
+    }).catch(() => {
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
     });
-
-    document.body.appendChild(tempForm);
-    tempForm.submit();
-    document.body.removeChild(tempForm);
-
-    // Fallback success after 2s in case iframe onload doesn't fire (cross-origin)
-    setTimeout(() => {
-      form.style.display = 'none';
-      document.getElementById('formSuccess').classList.add('show');
-    }, 2000);
   }
 </script>
 </body>
