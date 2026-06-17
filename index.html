@@ -743,7 +743,7 @@
         <!-- 出席人數 -->
         <div class="rf-group">
           <label class="rf-label">出席人數 GUESTS</label>
-          <input class="rf-input" type="number" id="f-guests" name="entry.1582645283" placeholder="0" min="0" oninput="toggleConditional()">
+          <input class="rf-input" type="number" id="f-guests" name="entry.1217904985" placeholder="0" min="0" oninput="toggleConditional()">
         </div>
 
         <!-- 條件顯示區塊 -->
@@ -759,7 +759,7 @@
             </div>
             <div class="rf-group">
               <label class="rf-label">兒童座椅 HIGH CHAIRS</label>
-              <input class="rf-input" type="number" id="f-chair" name="entry.1217904985" placeholder="0" min="0">
+              <input class="rf-input" type="number" id="f-chair" name="entry.1582645283" placeholder="0" min="0">
             </div>
           </div>
         </div>
@@ -777,13 +777,13 @@
         <!-- 喜帖寄送地址 -->
         <div class="rf-group">
           <label class="rf-label">喜帖寄送地址 MAILING ADDRESS</label>
-          <input class="rf-input" type="text" id="f-addr" name="entry.1733585708" placeholder="請輸入收件地址">
+          <input class="rf-input" type="text" id="f-addr" name="entry.318159861" placeholder="請輸入收件地址">
         </div>
 
         <!-- 給新人的祝福 -->
         <div class="rf-group">
           <label class="rf-label">給新人的祝福 BLESSING</label>
-          <textarea class="rf-textarea" id="f-note" name="entry.318159861" placeholder="有任何話想告訴我們，歡迎留言 ♡"></textarea>
+          <textarea class="rf-textarea" id="f-note" name="entry.1733585708" placeholder="有任何話想告訴我們，歡迎留言 ♡"></textarea>
         </div>
 
         <button type="submit" class="rf-submit">送出回函 SUBMIT</button>
@@ -879,17 +879,17 @@
 
     const get = id => { const el = document.getElementById(id); return el ? el.value : ''; };
     const fields = {
-      'entry.512433842': get('f-name'),
+      'entry.512433842':  get('f-name'),
       'entry.1350810425': get('f-email'),
-      'entry.550336279': get('f-phone'),
-      'entry.321525737': get('f-rel'),
-      'entry.742856553': get('f-attend'),
-      'entry.1582645283': get('f-guests'),
-      'entry.263539372': get('f-diet'),
-      'entry.1217904985': get('f-chair'),
-      'entry.2144421356': get('f-invite'),
-      'entry.1733585708': get('f-addr'),
-      'entry.318159861': get('f-note'),
+      'entry.550336279':  get('f-phone'),
+      'entry.321525737':  get('f-rel'),
+      'entry.742856553':  get('f-attend'),
+      'entry.1217904985': get('f-guests'),   // 出席人數
+      'entry.1582645283': get('f-chair'),    // 兒童座椅張數
+      'entry.263539372':  get('f-diet'),     // 飲食需求
+      'entry.2144421356': get('f-invite'),   // 是否需要紙本喜帖
+      'entry.318159861':  get('f-addr'),     // 喜帖寄送地址
+      'entry.1733585708': get('f-note'),     // 給新人的祝福
     };
 
     const body = Object.entries(fields)
