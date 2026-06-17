@@ -877,18 +877,19 @@
     e.preventDefault();
     const ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScTlgf8LWp_8aVC0WPl6GtruQY7T4v7sng3tUPfdCOIqXS3-A/formResponse';
 
+    const get = id => { const el = document.getElementById(id); return el ? el.value : ''; };
     const fields = {
-      'entry.512433842': document.getElementById('f-name').value,
-      'entry.1350810425': document.getElementById('f-email').value,
-      'entry.550336279': document.getElementById('f-phone').value,
-      'entry.321525737': document.getElementById('f-rel').value,
-      'entry.742856553': document.getElementById('f-attend').value,
-      'entry.1217904985': document.getElementById('f-adults').value,
-      'entry.1582645283': document.getElementById('f-children').value,
-      'entry.263539372': document.getElementById('f-diet').value,
-      'entry.2144421356': document.getElementById('f-chair').value,
-      'entry.318159861': document.getElementById('f-note').value,
-      'entry.1733585708': document.getElementById('f-extra').value,
+      'entry.512433842': get('f-name'),
+      'entry.1350810425': get('f-email'),
+      'entry.550336279': get('f-phone'),
+      'entry.321525737': get('f-rel'),
+      'entry.742856553': get('f-attend'),
+      'entry.1582645283': get('f-guests'),
+      'entry.263539372': get('f-diet'),
+      'entry.1217904985': get('f-chair'),
+      'entry.2144421356': get('f-invite'),
+      'entry.1733585708': get('f-addr'),
+      'entry.318159861': get('f-note'),
     };
 
     const body = Object.entries(fields)
