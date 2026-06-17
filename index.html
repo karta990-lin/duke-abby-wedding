@@ -717,40 +717,33 @@
 
         <!-- 與新人關係 -->
         <div class="rf-group">
-          <label class="rf-label">與新人關係 RELATIONSHIP</label>
+          <label class="rf-label">與新人的關係 RELATIONSHIP</label>
           <select class="rf-select" id="f-rel" name="entry.321525737">
-            <option value="">請選擇您的關係</option>
-            <option value="男方家人">男方家人</option>
-            <option value="女方家人">女方家人</option>
+            <option value="">請選擇</option>
+            <option value="男方親戚、家人">男方親戚、家人</option>
             <option value="男方同學、好友">男方同學、好友</option>
+            <option value="男方同事、長官">男方同事、長官</option>
+            <option value="女方親戚、家人">女方親戚、家人</option>
             <option value="女方同學、好友">女方同學、好友</option>
-            <option value="男方同事">男方同事</option>
-            <option value="女方同事">女方同事</option>
-            <option value="雙方共同好友">雙方共同好友</option>
+            <option value="女方同事、長官">女方同事、長官</option>
           </select>
         </div>
 
         <!-- 是否出席 -->
         <div class="rf-group">
-          <label class="rf-label">是否出席 ATTENDANCE</label>
+          <label class="rf-label">是否出席婚禮 ATTENDANCE</label>
           <select class="rf-select" id="f-attend" name="entry.742856553">
             <option value="">請選擇</option>
             <option value="出席，絕對到場！">出席，絕對到場！</option>
-            <option value="很遺憾無法出席">很遺憾無法出席</option>
-            <option value="尚未確定">尚未確定</option>
+            <option value="禮到人不到，請還是寄喜帖給我噢！">禮到人不到，請還是寄喜帖給我噢！</option>
+            <option value="可惜無法出席，祝福的心與新人同在！">可惜無法出席，祝福的心與新人同在！</option>
           </select>
         </div>
 
-        <!-- 午宴人數 -->
-        <div class="rf-row">
-          <div class="rf-group">
-            <label class="rf-label">儀式人數 CEREMONY GUESTS</label>
-            <input class="rf-input" type="number" id="f-adults" name="entry.1217904985" placeholder="0" min="0" oninput="toggleConditional()">
-          </div>
-          <div class="rf-group">
-            <label class="rf-label">宴客人數 BANQUET GUESTS</label>
-            <input class="rf-input" type="number" id="f-children" name="entry.1582645283" placeholder="0" min="0" oninput="toggleConditional()">
-          </div>
+        <!-- 出席人數 -->
+        <div class="rf-group">
+          <label class="rf-label">出席人數 GUESTS</label>
+          <input class="rf-input" type="number" id="f-guests" name="entry.1582645283" placeholder="0" min="0" oninput="toggleConditional()">
         </div>
 
         <!-- 條件顯示區塊 -->
@@ -762,30 +755,36 @@
                 <option value="">請選擇</option>
                 <option value="葷食">葷食</option>
                 <option value="素食">素食</option>
-                <option value="海鮮過敏">海鮮過敏</option>
-                <option value="堅果過敏">堅果過敏</option>
-                <option value="其他過敏或限制">其他過敏或限制</option>
-                <option value="無特殊需求">無特殊需求</option>
               </select>
             </div>
             <div class="rf-group">
-              <label class="rf-label">是否需要兒童椅 HIGH CHAIR</label>
-              <select class="rf-select" id="f-chair" name="entry.2144421356">
-                <option value="">請選擇</option>
-                <option value="是">是</option>
-                <option value="否">否</option>
-              </select>
+              <label class="rf-label">兒童座椅 HIGH CHAIRS</label>
+              <input class="rf-input" type="number" id="f-chair" name="entry.1217904985" placeholder="0" min="0">
             </div>
           </div>
         </div>
 
-        <!-- 備註 -->
+        <!-- 是否需要紙本喜帖 -->
         <div class="rf-group">
-          <label class="rf-label">給新人的話 MESSAGE</label>
-          <textarea class="rf-textarea" id="f-note" name="entry.318159861" placeholder="有任何話想告訴我們，歡迎留言 ♡"></textarea>
+          <label class="rf-label">是否需要紙本喜帖 PHYSICAL INVITATION</label>
+          <select class="rf-select" id="f-invite" name="entry.2144421356">
+            <option value="">請選擇</option>
+            <option value="是">是</option>
+            <option value="否">否</option>
+          </select>
         </div>
 
-        <input type="hidden" id="f-extra" name="entry.1733585708" value="">
+        <!-- 喜帖寄送地址 -->
+        <div class="rf-group">
+          <label class="rf-label">喜帖寄送地址 MAILING ADDRESS</label>
+          <input class="rf-input" type="text" id="f-addr" name="entry.1733585708" placeholder="請輸入收件地址">
+        </div>
+
+        <!-- 給新人的祝福 -->
+        <div class="rf-group">
+          <label class="rf-label">給新人的祝福 BLESSING</label>
+          <textarea class="rf-textarea" id="f-note" name="entry.318159861" placeholder="有任何話想告訴我們，歡迎留言 ♡"></textarea>
+        </div>
 
         <button type="submit" class="rf-submit">送出回函 SUBMIT</button>
       </form>
@@ -862,10 +861,9 @@
 
   // ── CONDITIONAL FIELDS ──
   function toggleConditional() {
-    const adults = parseInt(document.getElementById('f-adults').value) || 0;
-    const children = parseInt(document.getElementById('f-children').value) || 0;
+    const guests = parseInt(document.getElementById('f-guests').value) || 0;
     const cf = document.getElementById('conditionalFields');
-    if (adults > 0 || children > 0) {
+    if (guests > 0) {
       cf.classList.remove('hidden');
       cf.classList.add('visible');
     } else {
