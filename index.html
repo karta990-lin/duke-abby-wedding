@@ -500,6 +500,22 @@
     .form-card { padding: 1.8rem 1.2rem; }
   }
 
+  /* ── MUSIC BUTTON ── */
+  #music-btn {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(250,247,242,.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212,163,115,.35);
+    box-shadow: 0 4px 20px rgba(100,70,40,.15);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.3rem; color: var(--caramel);
+    transition: transform .2s, box-shadow .2s;
+    user-select: none;
+  }
+  #music-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(100,70,40,.22); }
+  #music-btn.playing { background: rgba(212,163,115,.18); }
+
   /* ── UTILITIES ── */
   .nowrap { white-space: nowrap; }
 </style>
@@ -808,7 +824,42 @@
 <!-- HIDDEN IFRAME -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
+<!-- MUSIC PLAYER -->
+<div id="music-btn" onclick="toggleMusic()" title="播放／暫停音樂">
+  <span id="music-icon">♪</span>
+</div>
+<iframe id="yt-player"
+  src="https://www.youtube.com/embed/VrJto8EU5Es?enablejsapi=1&autoplay=0&loop=1&playlist=VrJto8EU5Es&controls=0&mute=0"
+  allow="autoplay"
+  style="display:none; width:0; height:0; border:none; position:absolute;">
+</iframe>
+
 <script>
+  // ── MUSIC PLAYER ──
+  let ytPlayer = null;
+  let isPlaying = false;
+
+  function onYouTubeIframeAPIReady() {}
+
+  function toggleMusic() {
+    const iframe = document.getElementById('yt-player');
+    const btn = document.getElementById('music-btn');
+    const icon = document.getElementById('music-icon');
+
+    if (!isPlaying) {
+      iframe.style.display = 'block';
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      isPlaying = true;
+      icon.textContent = '♫';
+      btn.classList.add('playing');
+    } else {
+      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      isPlaying = false;
+      icon.textContent = '♪';
+      btn.classList.remove('playing');
+    }
+  }
+
   // ── NAV TOGGLE ──
   document.getElementById('navToggle').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
