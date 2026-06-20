@@ -519,7 +519,7 @@
     border-radius: 16px;
     padding: .9rem 1.2rem;
     box-shadow: 0 8px 32px rgba(100,70,40,.14);
-    max-width: 240px;
+    width: max-content;
     opacity: 1;
     transform: translateY(0);
     transition: opacity .6s ease, transform .6s ease;
@@ -538,11 +538,13 @@
     font-family: 'Noto Serif TC', serif;
     font-size: .78rem; font-weight: 500; color: var(--choco);
     letter-spacing: .06em; margin-bottom: .2rem;
+    white-space: nowrap;
   }
   .toast-sub {
     font-family: 'Noto Serif TC', serif;
     font-size: .68rem; font-weight: 300; color: var(--text-mid);
     letter-spacing: .04em; line-height: 1.5;
+    white-space: nowrap;
   }
 
   /* ── MUSIC BUTTON ── */
