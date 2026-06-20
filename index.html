@@ -362,6 +362,15 @@
     font-size: .68rem; font-style: italic; font-weight: 300;
     color: var(--text-mid); letter-spacing: .02em; text-align: center;
   }
+  .dc-scroll-hint {
+    font-family: 'Noto Serif TC', serif;
+    font-size: .68rem; font-weight: 300;
+    color: var(--sage); letter-spacing: .06em;
+    margin-bottom: .6rem;
+    display: none;
+  }
+  @media(max-width: 700px) { .dc-scroll-hint { display: block; } }
+
   .dc-footer-text {
     font-family: 'Noto Serif TC', serif;
     font-size: clamp(.8rem, 2vw, .92rem); font-weight: 300;
@@ -731,6 +740,7 @@
       </div>
     </div>
 
+    <p class="dc-scroll-hint">＊ 手機觀看時可左右滑動查看更多顏色</p>
     <p class="dc-footer-text">邀請您穿著以上色系與我們共裹盛舉</p>
   </div>
 </section>
