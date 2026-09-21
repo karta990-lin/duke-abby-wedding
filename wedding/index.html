@@ -137,16 +137,35 @@
   .venue small { display: block; margin-top: .6rem; font-size: .72rem; letter-spacing: .14em; opacity: .92; }
   .married { margin-top: 3rem; text-align: center; font-family: var(--serif-it); font-style: italic; font-size: 1rem; letter-spacing: .06em; }
 
-  /* 倒數 */
+  /* 倒數（翻頁時鐘） */
   .countdown { text-align: center; }
   .eyebrow { font-family: var(--serif-en); font-size: .68rem; letter-spacing: .38em; text-transform: uppercase; color: var(--tan-dark); padding-left: .38em; }
-  .cd-row { display: flex; justify-content: center; gap: clamp(14px, 5vw, 30px); margin-top: 1.6rem; }
-  .cd-row div { min-width: 56px; }
-  .cd-row b { display: block; font-family: var(--serif-en); font-weight: 400; font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .cd-row span { font-family: var(--serif-en); font-size: .6rem; letter-spacing: .25em; color: var(--tan-dark); text-transform: uppercase; }
+  .cd-row { display: flex; justify-content: center; gap: clamp(8px, 3vw, 16px); margin-top: 1.8rem; }
+  .cd-unit { width: clamp(62px, 19vw, 84px); }
+  .cd-tile {
+    position: relative; aspect-ratio: 3 / 4; border-radius: 8px; overflow: hidden;
+    background: linear-gradient(180deg, #8a3336 0 50%, #6f2427 50% 100%);
+    box-shadow: 0 10px 22px rgba(90, 30, 30, .28), inset 0 1px 0 rgba(255, 255, 255, .18);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ivory); font-family: var(--serif-en); font-size: clamp(1.9rem, 9.5vw, 2.7rem); line-height: 1;
+    font-variant-numeric: tabular-nums;
+    perspective: 400px;
+  }
+  .cd-tile::before { /* 翻頁中線 */
+    content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
+    background: rgba(0, 0, 0, .35); box-shadow: 0 1px 0 rgba(255, 255, 255, .12); z-index: 2;
+  }
+  .cd-tile::after { /* 兩側轉軸 */
+    content: ''; position: absolute; left: -3px; right: -3px; top: calc(50% - 4px); height: 8px; z-index: 3;
+    background:
+      radial-gradient(circle at 3px 4px, #d9b48f 0 2.5px, transparent 3px),
+      radial-gradient(circle at calc(100% - 3px) 4px, #d9b48f 0 2.5px, transparent 3px);
+  }
+  .cd-tile b { font-weight: 400; display: block; transform-origin: 50% 50%; }
+  .cd-tile b.flip { animation: flip .5s ease-in-out; }
+  @keyframes flip { 0% { transform: rotateX(90deg); opacity: 0; } 100% { transform: rotateX(0); opacity: 1; } }
+  .cd-unit span { display: block; margin-top: 10px; font-family: var(--serif-en); font-size: .6rem; letter-spacing: .25em; padding-left: .25em; color: var(--tan-dark); text-transform: uppercase; }
   .cd-msg { margin-top: 1.6rem; font-size: .85rem; letter-spacing: .2em; color: #6a5545; }
-
-  .amp-big { font-family: var(--script); font-size: 4.2rem; line-height: .8; color: var(--ink); }
 
   /* Dress code */
   .dress { text-align: center; }
@@ -154,18 +173,18 @@
     font-family: var(--serif-en); font-weight: 400; font-size: clamp(1.9rem, 8vw, 2.5rem); letter-spacing: .12em; text-transform: uppercase;
   }
   .dress .zh { margin-top: .4rem; font-size: .82rem; letter-spacing: .3em; color: #6a5545; }
-  .swatches { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px 16px; margin-top: 2rem; }
-  .sw { width: 92px; }
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(4px, 2vw, 14px); margin-top: 2rem; }
+  .sw { min-width: 0; }
   .sw i {
-    display: block; width: 78px; height: 78px; border-radius: 50%; margin: 0 auto;
+    display: block; width: 100%; max-width: 78px; aspect-ratio: 1; border-radius: 50%; margin: 0 auto;
     box-shadow: 0 8px 18px rgba(80, 55, 30, .18), inset 0 0 0 1px rgba(255,255,255,.25);
     transform: scale(0); transition: transform .7s cubic-bezier(.3, 1.5, .5, 1);
   }
   .in .sw i { transform: scale(1); }
   .sw:nth-child(2) i { transition-delay: .1s; } .sw:nth-child(3) i { transition-delay: .2s; }
   .sw:nth-child(4) i { transition-delay: .3s; } .sw:nth-child(5) i { transition-delay: .4s; }
-  .sw b { display: block; margin-top: 10px; font-weight: 400; font-size: .8rem; letter-spacing: .12em; }
-  .sw span { display: block; font-family: var(--serif-it); font-style: italic; font-size: .72rem; color: #7a6656; }
+  .sw b { display: block; margin-top: 10px; font-weight: 400; font-size: clamp(.68rem, 3vw, .8rem); letter-spacing: .06em; white-space: nowrap; }
+  .sw span { display: block; font-family: var(--serif-it); font-style: italic; font-size: clamp(.56rem, 2.5vw, .72rem); color: #7a6656; white-space: nowrap; }
   .dress .foot { margin-top: 2rem; font-size: .8rem; letter-spacing: .14em; color: #6a5545; }
 
   /* Location */
@@ -196,6 +215,7 @@
   .btn:hover { background: #fff; color: var(--tan-dark); }
 
   /* 桌次查詢 */
+  .seat h2 { font-family: 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', 'Noto Sans TC', sans-serif; font-weight: 700; letter-spacing: .2em; padding-left: .2em; }
   .seat { text-align: center; }
   .seat .lead { margin-top: .8rem; font-size: .85rem; letter-spacing: .12em; color: #6a5545; line-height: 1.9; }
   .search {
@@ -230,6 +250,15 @@
   .card .wish { font-family: var(--script); font-size: 1.7rem; color: var(--ribbon); margin-top: .8rem; }
   .card.miss { border-top-color: var(--latte); }
   .card.miss p { font-size: .88rem; letter-spacing: .1em; line-height: 1.9; color: #6a5545; }
+  .list { background: #fff; text-align: left; box-shadow: 0 12px 30px rgba(90, 60, 30, .10); border-top: 3px solid var(--tan); animation: pop .6s cubic-bezier(.3, 1.3, .5, 1); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid #efe4d6; }
+  .row:last-child { border-bottom: 0; }
+  .row .nm { font-size: 1rem; letter-spacing: .14em; overflow-wrap: anywhere; }
+  .row .nm small { display: inline-block; margin-left: .7em; padding: 1px 8px; border: 1px solid var(--tan); border-radius: 999px; font-size: .68rem; letter-spacing: .06em; color: var(--tan-dark); white-space: nowrap; }
+  .row .tb { flex: none; text-align: right; font-family: var(--serif-en); font-size: 1.5rem; color: var(--burgundy); line-height: 1; }
+  .row .tb em { font-style: normal; font-family: var(--serif-tc); font-size: .7rem; letter-spacing: .1em; color: #7a6656; margin: 0 2px; }
+  .row .tb.txt { font-family: var(--serif-tc); font-size: 1.15rem; letter-spacing: .12em; }
+  .card .party { display: inline-block; margin-top: .7rem; padding: 3px 14px; border: 1px solid var(--tan); border-radius: 999px; font-size: .75rem; letter-spacing: .12em; color: var(--tan-dark); }
   .pick { margin-top: .4rem; font-size: .78rem; letter-spacing: .1em; color: #7a6656; margin-bottom: 10px; }
 
   footer { background: var(--tan-dark); color: #fff; text-align: center; padding: 46px 20px calc(46px + env(safe-area-inset-bottom)); }
@@ -296,13 +325,13 @@
 </section>
 
 <!-- ═════════ 倒數 ═════════ -->
-<section class="section ivory countdown">
+<section class="section white countdown">
   <p class="eyebrow reveal">The Countdown</p>
   <div class="cd-row reveal d1" id="cd">
-    <div><b id="cd-d">0</b><span>Days</span></div>
-    <div><b id="cd-h">00</b><span>Hours</span></div>
-    <div><b id="cd-m">00</b><span>Min</span></div>
-    <div><b id="cd-s">00</b><span>Sec</span></div>
+    <div class="cd-unit"><div class="cd-tile"><b id="cd-d">0</b></div><span>Days</span></div>
+    <div class="cd-unit"><div class="cd-tile"><b id="cd-h">00</b></div><span>Hours</span></div>
+    <div class="cd-unit"><div class="cd-tile"><b id="cd-m">00</b></div><span>Min</span></div>
+    <div class="cd-unit"><div class="cd-tile"><b id="cd-s">00</b></div><span>Sec</span></div>
   </div>
   <p class="cd-msg reveal d2" id="cd-msg">2026 · 09 · 26　12:00 PM</p>
 </section>
@@ -382,7 +411,7 @@
   <div class="col">
     <p class="eyebrow reveal">Seating</p>
     <h2 class="reveal d1" style="margin-top:.8rem">查詢桌次</h2>
-    <p class="lead reveal d1">輸入您的姓名，即可找到婚禮當天的座位。</p>
+    <p class="lead reveal d1">輸入您的姓名，即可找到婚禮當天的座位。<br>姓名後方有「共 N 位」代表您與家人同桌。</p>
 
     <form class="search reveal d2" id="seatForm" autocomplete="off">
       <input id="seatInput" type="text" inputmode="text" placeholder="請輸入姓名" aria-label="賓客姓名" enterkeyhint="search">
@@ -414,14 +443,20 @@
   var $d = document.getElementById('cd-d'), $h = document.getElementById('cd-h'),
       $m = document.getElementById('cd-m'), $s = document.getElementById('cd-s'), $msg = document.getElementById('cd-msg');
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function setNum(el, v) {
+    v = String(v);
+    if (el.textContent === v) return;
+    el.textContent = v;
+    el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
+  }
   function tick() {
     var diff = target - Date.now();
-    if (diff <= 0) { $d.textContent = '0'; $h.textContent = $m.textContent = $s.textContent = '00'; $msg.textContent = 'Today is the day ♡'; return; }
+    if (diff <= 0) { setNum($d, '0'); setNum($h, '00'); setNum($m, '00'); setNum($s, '00'); $msg.textContent = 'Today is the day ♡'; return; }
     var s = Math.floor(diff / 1000);
-    $d.textContent = Math.floor(s / 86400);
-    $h.textContent = pad(Math.floor(s % 86400 / 3600));
-    $m.textContent = pad(Math.floor(s % 3600 / 60));
-    $s.textContent = pad(s % 60);
+    setNum($d, Math.floor(s / 86400));
+    setNum($h, pad(Math.floor(s % 86400 / 3600)));
+    setNum($m, pad(Math.floor(s % 3600 / 60)));
+    setNum($s, pad(s % 60));
   }
   tick(); setInterval(tick, 1000);
 
@@ -430,24 +465,37 @@
   var form = document.getElementById('seatForm'), input = document.getElementById('seatInput'), box = document.getElementById('seatResult');
   function norm(s) { return String(s).normalize('NFKC').replace(/[\s·．.\-_]/g, '').toLowerCase(); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function party(g) { return g.count > 1 ? '<span class="party">共 ' + g.count + ' 位同行</span>' : ''; }
   function cardHTML(g) {
     var tbl = String(g.table), isNum = /^\d+$/.test(tbl);
-    return '<div class="card"><div class="who">' + esc(g.name) + '</div>' +
+    return '<div class="card"><div class="who">' + esc(g.name) + '</div>' + party(g) +
       '<div class="lab">Your Table</div>' +
       '<div class="num' + (isNum ? '' : ' txt') + '">' + esc(tbl) + '</div>' +
       (g.note ? '<div class="note">' + esc(g.note) + '</div>' : '') +
       '<div class="wish">Enjoy the celebration ♡</div></div>';
   }
+  function rowHTML(g) {
+    var tbl = String(g.table), isNum = /^\d+$/.test(tbl);
+    return '<div class="row"><span class="nm">' + esc(g.name) + (g.count > 1 ? '<small>共 ' + g.count + ' 位</small>' : '') + '</span>' +
+      '<span class="tb' + (isNum ? '' : ' txt') + '">' + (isNum ? '<em>桌</em>' : '') + esc(tbl) + '</span></div>';
+  }
+  function tableOrder(t) { return /^\d+$/.test(t) ? +t : 0; }   // 主桌排最前
   function search(q) {
     var k = norm(q);
     if (!k) { box.innerHTML = ''; return; }
-    var exact = list.filter(function (g) { return norm(g.name) === k; });
-    var hits = exact.length ? exact : list.filter(function (g) { return norm(g.name).indexOf(k) !== -1; });
+    var hits = list.filter(function (g) { return norm(g.name).indexOf(k) !== -1; });
     if (!hits.length) {
       box.innerHTML = '<div class="card miss"><p>找不到「' + esc(q.trim()) + '」的座位。<br>請確認姓名是否正確，或洽詢新人／現場接待人員。</p></div>';
-    } else {
-      box.innerHTML = (hits.length > 1 ? '<p class="pick">找到 ' + hits.length + ' 位符合的賓客</p>' : '') + hits.map(cardHTML).join('');
+      return;
     }
+    hits.sort(function (a, b) {
+      var ea = norm(a.name) === k ? 0 : 1, eb = norm(b.name) === k ? 0 : 1;
+      return ea - eb || tableOrder(a.table) - tableOrder(b.table);
+    });
+    if (hits.length === 1) { box.innerHTML = cardHTML(hits[0]); return; }
+    var people = hits.reduce(function (n, g) { return n + (g.count || 1); }, 0);
+    box.innerHTML = '<p class="pick">找到 ' + hits.length + ' 筆結果（共 ' + people + ' 位賓客）</p>' +
+      '<div class="list">' + hits.map(rowHTML).join('') + '</div>';
   }
   form.addEventListener('submit', function (e) { e.preventDefault(); search(input.value); input.blur(); });
 })();
