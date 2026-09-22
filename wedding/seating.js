@@ -166,7 +166,7 @@ window.SEATING = [
   { name: "郁真", table: "22", count: 1 },
   { name: "曹若惟", table: "22", count: 1 },
   { name: "曹惠玲", table: "22", count: 1 },
-  { name: "張寧洲", table: "22", count: 1 },
+  { name: "張寧州", table: "22", count: 1 },
   { name: "張育愷", table: "22", count: 1 },
   { name: "張育芹", table: "22", count: 1 },
   { name: "曹書睿", table: "22", count: 1 },
