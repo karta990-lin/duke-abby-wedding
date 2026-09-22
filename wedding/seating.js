@@ -1,4 +1,4 @@
-// 賓客桌次名單（來源：My Wedding 座位分配表，桌次為最新編號）。
+// 賓客桌次名單（來源：My Wedding 座位分配表 2更，桌次為最新編號，共 35 桌）。
 // name : 賓客姓名（姓名後方的數字已合併，例如「何崑山1～10」→ 何崑山 × 10）
 // table: 桌次（"主桌" 或數字）
 // count: 該姓名同桌總人數（本人＋家人／伴侶，1 代表只有本人）
@@ -21,10 +21,9 @@ window.SEATING = [
   { name: "儲慶生", table: "主桌", count: 1 },
   { name: "林同安", table: "主桌", count: 1 },
   { name: "何崑山", table: "2", count: 10 },
-  { name: "何秀枝", table: "2", count: 1 },
+  { name: "龔京凌", table: "2", count: 1 },
   { name: "何素月", table: "3", count: 8 },
-  { name: "李建忠", table: "3", count: 1 },
-  { name: "龔京凌", table: "3", count: 1 },
+  { name: "何秀枝", table: "3", count: 3 },
   { name: "呂紹永", table: "4", count: 1 },
   { name: "徐靜鶯", table: "4", count: 1 },
   { name: "李明倫", table: "4", count: 1 },
@@ -40,6 +39,7 @@ window.SEATING = [
   { name: "何鎮照", table: "6", count: 5 },
   { name: "李東軒", table: "6", count: 2 },
   { name: "李東漢", table: "6", count: 1 },
+  { name: "李建忠", table: "6", count: 1 },
   { name: "何秀梅", table: "7", count: 8 },
   { name: "何芳鎮", table: "7", count: 3 },
   { name: "張英俊", table: "8", count: 6 },
@@ -165,7 +165,7 @@ window.SEATING = [
   { name: "曹偉哲", table: "22", count: 1 },
   { name: "郁真", table: "22", count: 1 },
   { name: "曹若惟", table: "22", count: 1 },
-  { name: "惠玲姨", table: "22", count: 1 },
+  { name: "曹惠玲", table: "22", count: 1 },
   { name: "張寧洲", table: "22", count: 1 },
   { name: "張育愷", table: "22", count: 1 },
   { name: "張育芹", table: "22", count: 1 },
